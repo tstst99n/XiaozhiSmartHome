@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0f172a" />
+
+    <title>Xiaozhi Smart Home</title>
+
+    <!-- =====================================================
+         FONTS & ICONS
+    ====================================================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <!-- =====================================================
+         LIBRARIES
+    ====================================================== -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.css" />
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+
+    <!-- =====================================================
+         LOCAL CSS
+    ====================================================== -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="animations.css" />
+
+    <!-- =====================================================
+         PWA
+    ====================================================== -->
+    <link rel="manifest" href="manifest.json" />
+</head>
+
+<body>
+
+    <!-- =====================================================
+         BACKGROUND EFFECTS
+    ====================================================== -->
+    <div class="bg-overlay"></div>
+    <div class="bg-gradient"></div>
+
+    <!-- =====================================================
+         MAIN APP
+    ====================================================== -->
+    <div class="app-container">
+
+        <!-- =================================================
+             SIDEBAR
+        ================================================== -->
+        <aside class="sidebar glass-card">
+
+            <div class="logo-section">
+                <img src="images/logo.png" alt="Logo" class="logo-img" />
+
+                <div>
+                    <h1>XIAOZHI</h1>
+                    <p>SMART HOME</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <button class="nav-btn active" data-page="homePage">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Home</span>
+                </button>
+
+                <button class="nav-btn" data-page="sensorPage">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Sensors</span>
+                </button>
+
+                <button class="nav-btn" data-page="automationPage">
+                    <i class="fa-solid fa-clock"></i>
+                    <span>Automation</span>
+                </button>
+
+                <button class="nav-btn" data-page="otaPage">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>OTA</span>
+                </button>
+
+                <button class="nav-btn" data-page="settingsPage">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </button>
+
+                <button class="nav-btn" data-page="logsPage">
+                    <i class="fa-solid fa-file-waveform"></i>
+                    <span>Logs</span>
+                </button>
+
+            </nav>
+
+        </aside>
+
+        <!-- =================================================
+             CONTENT AREA
+        ================================================== -->
+        <main class="main-content">
+
+            <!-- =============================================
+                 HEADER
+            ============================================== -->
+            <header class="top-header glass-card">
+
+                <div class="header-left">
+
+                    <div class="status-chip online" id="wifiStatusChip">
+                        <i class="fa-solid fa-wifi"></i>
+                        <span id="wifiStatusText">Connected</span>
+                    </div>
+
+                    <div class="status-chip">
+                        <i class="fa-solid fa-microchip"></i>
+                        <span id="deviceIp">192.168.0.105</span>
+                    </div>
+
+                </div>
+
+                <div class="header-center">
+                    <h2>SMART HOME DASHBOARD</h2>
+                </div>
+
+                <div class="header-right">
+
+                    <div class="time-box">
+                        <div id="currentTime">12:45 PM</div>
+                        <small id="currentDate">28 May 2026</small>
+                    </div>
+
+                </div>
+
+            </header>
+
+            <!-- =============================================
+                 HOME PAGE
+            ============================================== -->
+            <section class="page active-page" id="homePage">
+
+                <!-- =========================================
+                     TOP STATUS CARDS
+                ========================================== -->
+                <div class="top-grid">
+
+                    <div class="status-card glass-card">
+                        <div class="status-icon temp-bg">
+                            <i class="fa-solid fa-temperature-three-quarters"></i>
+                        </div>
+
+                        <div>
+                            <p class="card-title">Temperature</p>
+                            <h2 id="temperatureValue">29.5°C</h2>
+                            <span class="status-label normal">NORMAL</span>
+                        </div>
+                    </div>
+
+                    <div class="status-card glass-card">
+                        <div class="status-icon humidity-bg">
+                            <i class="fa-solid fa-droplet"></i>
+                        </div>
+
+                        <div>
+                            <p class="card-title">Humidity</p>
+                            <h2 id="humidityValue">68%</h2>
+                            <span class="status-label comfort">COMFORT</span>
+                        </div>
+                    </div>
+
+                    <div class="status-card glass-card">
+                        <div class="status-icon signal-bg">
+                            <i class="fa-solid fa-signal"></i>
+                        </div>
+
+                        <div>
+                            <p class="card-title">WiFi RSSI</p>
+                            <h2 id="wifiRssi">-52 dBm</h2>
+                            <span class="status-label excellent">EXCELLENT</span>
+                        </div>
+                    </div>
+
+                    <div class="status-card glass-card">
+                        <div class="status-icon uptime-bg">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+
+                        <div>
+                            <p class="card-title">Uptime</p>
+                            <h2 id="uptimeValue">12H 22M</h2>
+                            <span class="status-label online">ONLINE</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- =========================================
+                     RELAY CONTROL SECTION
+                ========================================== -->
+                <section class="section-block">
+
+                    <div class="section-header">
+                        <h3>
+                            <i class="fa-solid fa-lightbulb"></i>
+                            Smart Relay Control
+                        </h3>
+                    </div>
+
+                    <div class="relay-grid">
+
+                        <!-- RELAY CARD 1 -->
+                        <div class="relay-card glass-card">
+                            <div class="relay-top">
+
+                                <div class="relay-icon glow-yellow">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                </div>
+
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="relay1">
+                                    <span class="slider"></span>
+                                </label>
+
+                            </div>
+
+                            <div class="relay-info">
+                                <h4>Light 1</h4>
+                                <p>Bedroom Light</p>
+                            </div>
+
+                            <div class="relay-status on" id="relay1Status">
+                                ON
+                            </div>
+                        </div>
+
+                        <!-- RELAY CARD 2 -->
+                        <div class="relay-card glass-card">
+                            <div class="relay-top">
+
+                                <div class="relay-icon glow-blue">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                </div>
+
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="relay2">
+                                    <span class="slider"></span>
+                                </label>
+
+                            </div>
+
+                            <div class="relay-info">
+                                <h4>Light 2</h4>
+                                <p>Living Room</p>
+                            </div>
+
+                            <div class="relay-status off" id="relay2Status">
+                                OFF
+                            </div>
+                        </div>
+
+                        <!-- RELAY CARD 3 -->
+                        <div class="relay-card glass-card">
+                            <div class="relay-top">
+
+                                <div class="relay-icon glow-green">
+                                    <i class="fa-solid fa-tv"></i>
+                                </div>
+
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="relay3">
+                                    <span class="slider"></span>
+                                </label>
+
+                            </div>
+
+                            <div class="relay-info">
+                                <h4>Light 3</h4>
+                                <p>Kitchen</p>
+                            </div>
+
+                            <div class="relay-status off" id="relay3Status">
+                                OFF
+                            </div>
+                        </div>
+
+                        <!-- RELAY CARD 4 -->
+                        <div class="relay-card glass-card">
+                            <div class="relay-top">
+
+                                <div class="relay-icon glow-purple">
+                                    <i class="fa-solid fa-plug"></i>
+                                </div>
+
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="relay4">
+                                    <span class="slider"></span>
+                                </label>
+
+                            </div>
+
+                            <div class="relay-info">
+                                <h4>Light 4</h4>
+                                <p>Appliance</p>
+                            </div>
+
+                            <div class="relay-status off" id="relay4Status">
+                                OFF
+                            </div>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================================
+                     FAN CONTROL SECTION
+                ========================================== -->
+                <section class="section-block">
+
+                    <div class="section-header">
+                        <h3>
+                            <i class="fa-solid fa-fan"></i>
+                            Fan Speed Control
+                        </h3>
+                    </div>
+
+                    <div class="fan-control-card glass-card">
+
+                        <div class="fan-animation-area">
+
+                            <div class="fan-circle">
+                                <i class="fa-solid fa-fan fan-spin" id="fanBlade"></i>
+                            </div>
+
+                            <h1 id="fanSpeedValue">75%</h1>
+
+                            <p>Current Speed</p>
+
+                        </div>
+
+                        <div class="slider-area">
+
+                            <div id="fanSlider"></div>
+
+                            <div class="fan-modes">
+
+                                <button class="mode-btn active">AUTO</button>
+                                <button class="mode-btn">MANUAL</button>
+                                <button class="mode-btn">ECO</button>
+                                <button class="mode-btn">VOICE</button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================================
+                     CHART SECTION
+                ========================================== -->
+                <section class="section-block">
+
+                    <div class="section-header">
+                        <h3>
+                            <i class="fa-solid fa-chart-simple"></i>
+                            Live Analytics
+                        </h3>
+                    </div>
+
+                    <div class="chart-grid">
+
+                        <div class="chart-card glass-card">
+                            <canvas id="temperatureChart"></canvas>
+                        </div>
+
+                        <div class="chart-card glass-card">
+                            <canvas id="humidityChart"></canvas>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================================
+                     SYSTEM HEALTH
+                ========================================== -->
+                <section class="section-block">
+
+                    <div class="section-header">
+                        <h3>
+                            <i class="fa-solid fa-heart-pulse"></i>
+                            System Health
+                        </h3>
+                    </div>
+
+                    <div class="health-grid">
+
+                        <div class="health-card glass-card">
+                            <span>CPU Usage</span>
+                            <h2 id="cpuUsage">22%</h2>
+                        </div>
+
+                        <div class="health-card glass-card">
+                            <span>Free RAM</span>
+                            <h2 id="freeRam">148 KB</h2>
+                        </div>
+
+                        <div class="health-card glass-card">
+                            <span>Flash Usage</span>
+                            <h2 id="flashUsage">48%</h2>
+                        </div>
+
+                        <div class="health-card glass-card">
+                            <span>Firmware</span>
+                            <h2 id="firmwareVersion">v1.0.0</h2>
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+            <!-- =============================================
+                 SENSOR PAGE
+            ============================================== -->
+            <section class="page" id="sensorPage">
+
+                <div class="page-title glass-card">
+                    <h2>
+                        <i class="fa-solid fa-chart-line"></i>
+                        Sensor Analytics
+                    </h2>
+                </div>
+
+                <div class="chart-full glass-card">
+                    <canvas id="sensorChart"></canvas>
+                </div>
+
+            </section>
+
+            <!-- =============================================
+                 AUTOMATION PAGE
+            ============================================== -->
+            <section class="page" id="automationPage">
+
+                <div class="page-title glass-card">
+                    <h2>
+                        <i class="fa-solid fa-clock"></i>
+                        RTC Scheduler
+                    </h2>
+                </div>
+
+                <div class="schedule-container glass-card">
+
+                    <div class="schedule-form">
+
+                        <input type="time" id="scheduleTime">
+
+                        <select id="scheduleDevice">
+                            <option>Light 1</option>
+                            <option>Light 2</option>
+                            <option>Light 3</option>
+                            <option>Light 4</option>
+                            <option>Fan</option>
+                        </select>
+
+                        <select id="scheduleAction">
+                            <option>ON</option>
+                            <option>OFF</option>
+                        </select>
+
+                        <button class="primary-btn">
+                            <i class="fa-solid fa-plus"></i>
+                            Add Schedule
+                        </button>
+
+                    </div>
+
+                    <div class="schedule-list" id="scheduleList">
+
+                        <div class="schedule-item">
+                            <span>11:00 PM → Light OFF</span>
+                            <button>
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+
+                        <div class="schedule-item">
+                            <span>06:00 AM → Fan ON</span>
+                            <button>
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- =============================================
+                 OTA PAGE
+            ============================================== -->
+            <section class="page" id="otaPage">
+
+                <div class="page-title glass-card">
+                    <h2>
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        OTA Firmware Update
+                    </h2>
+                </div>
+
+                <div class="ota-container glass-card">
+
+                    <input type="file" id="firmwareFile">
+
+                    <button class="primary-btn">
+                        <i class="fa-solid fa-upload"></i>
+                        Upload Firmware
+                    </button>
+
+                    <div class="progress-container">
+
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="otaProgress"></div>
+                        </div>
+
+                        <span id="otaPercent">72%</span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- =============================================
+                 SETTINGS PAGE
+            ============================================== -->
+            <section class="page" id="settingsPage">
+
+                <div class="page-title glass-card">
+                    <h2>
+                        <i class="fa-solid fa-gear"></i>
+                        Settings
+                    </h2>
+                </div>
+
+                <div class="settings-grid">
+
+                    <div class="setting-card glass-card">
+
+                        <h3>Theme</h3>
+
+                        <div class="theme-buttons">
+                            <button class="primary-btn">Dark</button>
+                            <button class="secondary-btn">Light</button>
+                        </div>
+
+                    </div>
+
+                    <div class="setting-card glass-card">
+
+                        <h3>WiFi</h3>
+
+                        <button class="primary-btn">
+                            Configure WiFi
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- =============================================
+                 LOG PAGE
+            ============================================== -->
+            <section class="page" id="logsPage">
+
+                <div class="page-title glass-card">
+                    <h2>
+                        <i class="fa-solid fa-file-waveform"></i>
+                        Event Logs
+                    </h2>
+                </div>
+
+                <div class="logs-container glass-card" id="logsContainer">
+
+                    <div class="log-item success">
+                        ✓ Light 1 Turned ON
+                    </div>
+
+                    <div class="log-item warning">
+                        ⚠ WiFi Disconnected
+                    </div>
+
+                    <div class="log-item info">
+                        ✓ Fan Speed Updated
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- =====================================================
+         AUDIO
+    ====================================================== -->
+    <audio id="clickSound" src="sounds/click.mp3"></audio>
+
+    <!-- =====================================================
+         LIBRARIES
+    ====================================================== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    <!-- =====================================================
+         LOCAL JS
+    ====================================================== -->
+    <script src="websocket.js"></script>
+    <script src="charts.js"></script>
+    <script src="dashboard.js"></script>
+    <script src="app.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+{
+  "name": "Xiaozhi Smart Home",
+  "short_name": "Xiaozhi",
+  "description": "Advanced ESP32-S3 Smart Home Automation System with Voice Control, RTC Scheduler, TRIAC Fan Dimmer, OTA Updates and Realtime Dashboard.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f172a",
+  "theme_color": "#0ea5e9",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": [
+    "smart-home",
+    "utilities",
+    "productivity",
+    "iot"
+  ],
+  "icons": [
+    {
+      "src": "/icons/wifi.svg",
+      "sizes": "72x72",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/fan.svg",
+      "sizes": "96x96",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/bulb.svg",
+      "sizes": "128x128",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/temp.svg",
+      "sizes": "144x144",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/humidity.svg",
+      "sizes": "152x152",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/online.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/offline.svg",
+      "sizes": "384x384",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "Open Smart Home Dashboard",
+      "url": "/"
+    },
+    {
+      "name": "Relay Control",
+      "short_name": "Relays",
+      "description": "Control Home Appliances",
+      "url": "/#relayPage"
+    },
+    {
+      "name": "Fan Control",
+      "short_name": "Fan",
+      "description": "Control TRIAC Fan Dimmer",
+      "url": "/#fanPage"
+    },
+    {
+      "name": "RTC Scheduler",
+      "short_name": "Scheduler",
+      "description": "Manage RTC Automation",
+      "url": "/#schedulerPage"
+    },
+    {
+      "name": "OTA Update",
+      "short_name": "OTA",
+      "description": "Firmware Update",
+      "url": "/#otaPage"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/dashboard.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/screenshots/mobile-dashboard.png",
+      "sizes": "720x1280",
+      "type": "image/png"
+    }
+  ],
+  "prefer_related_applications": false
+}
